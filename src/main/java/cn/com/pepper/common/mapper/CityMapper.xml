@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.pepper.common.dao.CityDao" >
+  <resultMap id="BaseResultMap" type="cn.com.pepper.common.model.City" >
+    <id column="cityid" property="cityid" jdbcType="INTEGER" />
+    <result column="cityname" property="cityname" jdbcType="VARCHAR" />
+    <result column="citystate" property="citystate" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    cityid, cityname, citystate
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_city
+    where cityid = #{cityid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_city
+    where cityid = #{cityid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.com.pepper.common.model.City" >
+    insert into t_city (cityid, cityname, citystate
+      )
+    values (#{cityid,jdbcType=INTEGER}, #{cityname,jdbcType=VARCHAR}, #{citystate,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.com.pepper.common.model.City" >
+    insert into t_city
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cityid != null" >
+        cityid,
+      </if>
+      <if test="cityname != null" >
+        cityname,
+      </if>
+      <if test="citystate != null" >
+        citystate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cityid != null" >
+        #{cityid,jdbcType=INTEGER},
+      </if>
+      <if test="cityname != null" >
+        #{cityname,jdbcType=VARCHAR},
+      </if>
+      <if test="citystate != null" >
+        #{citystate,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.pepper.common.model.City" >
+    update t_city
+    <set >
+      <if test="cityname != null" >
+        cityname = #{cityname,jdbcType=VARCHAR},
+      </if>
+      <if test="citystate != null" >
+        citystate = #{citystate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where cityid = #{cityid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.pepper.common.model.City" >
+    update t_city
+    set cityname = #{cityname,jdbcType=VARCHAR},
+      citystate = #{citystate,jdbcType=VARCHAR}
+    where cityid = #{cityid,jdbcType=INTEGER}
+  </update>
+</mapper>

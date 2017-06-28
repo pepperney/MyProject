@@ -1,0 +1,93 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"> 
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="keywords" content="">
+	<meta name="discription" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>首页</title> 
+<link rel="stylesheet" type="text/css" href="../css/weui.min.css"> 
+<link rel="stylesheet" type="text/css" href="../css/global.min.css">
+
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+		
+    <script type="text/javascript">
+        function submitForm(){
+			var username = $("#username").val();
+			if(username==""){
+				alert("用户名不能为空");
+				return false;
+			}
+			var password = $("#password").val();
+			if(password.length < 6){
+				alert("密码应不小于6位");
+				return false;
+			}
+			var repassword = $("#repassword").val();
+			if(repassword != password){
+				alert("两次密码不一致");
+				return false;
+			}
+			var jsondate = {"username":username,"password":password};
+			$.ajax({
+				url:"../register",
+				type:"POST",
+				contentType: "application/json; charset=utf-8",
+				async: false,
+				dataType:"json",
+				data:JSON.stringify(jsondate),
+				success:function(re){
+                  document.write(re.msg);
+				}
+			});
+		}        
+	</script>
+
+
+
+</head>
+<body id="vM"> 
+<div class="weui_cells weui_cells_form plr_10">
+ 	<div class="weui_cell">
+	    <div class="weui_cell_hd"><label class="weui_label">用户名</label></div>
+	    <div class="weui_cell_bd weui_cell_primary">
+	    	<input class="weui_input" type="text" v-model="username" id="username" placeholder="请输入用户名/手机号">
+	    </div>
+ 	</div>
+
+ 	<div class="weui_cell">
+	    <div class="weui_cell_hd"><label class="weui_label">密码</label></div>
+	    <div class="weui_cell_bd weui_cell_primary">
+	    	<input class="weui_input" type="text"  v-model="password" id="password"  placeholder="至少6位">
+	    </div>
+    </div> 
+
+    <div class="weui_cell">
+	    <div class="weui_cell_hd"><label class="weui_label">确认密码</label></div>
+	    <div class="weui_cell_bd weui_cell_primary">
+	    	<input class="weui_input" type="text"  v-model="password" id="repassword"  placeholder="请再次输入密码">
+	    </div>
+    </div> 
+</div>
+
+<div class="plr_10 mt_10">
+	<a href="javascript:;" class="weui_btn weui_btn_primary" style="background-color:#28ABE3;" onclick="submitForm();return false;">注册</a>
+</div>
+ 
+ <div class="weui_cells">
+  <div class="weui_cell">
+    <div class="weui_cell_bd weui_cell_primary">
+      <p>已有账号？ </p>
+    </div>
+    <div class="weui_cell_ft">
+     <a href="bind.html" title="">前往绑定</a>
+    </div>
+  </div>
+</div>
+
+
+</body> 
+
+</html> 

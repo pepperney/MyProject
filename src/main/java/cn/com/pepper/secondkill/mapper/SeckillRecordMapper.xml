@@ -1,0 +1,39 @@
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.com.pepper.secondkill.dao.SeckillRecordDao">
+
+	<insert id="insertRecord">
+		<!--当出现主键冲突时(即重复秒杀时)，会报错;不想让程序报错，加入ignore -->
+		INSERT ignore INTO t_seckill_record(seckill_id,user_phone,state,create_time)
+		VALUES
+		(#{seckillId},#{userPhone},0,NOW())
+	</insert>
+
+	<select id="getRecordById" resultType="cn.com.pepper.secondkill.model.SeckillRecord">
+
+		<!--根据seckillId查询SuccessKilled对象，并携带Seckill对象 -->
+		<!--如何告诉mybatis把结果映射到SuccessKill属性同时映射到Seckill属性 -->
+		<!--可以自由控制SQL语句 -->
+
+		SELECT
+		sk.seckill_id,
+		sk.user_phone,
+		sk.create_time,
+		sk.state,
+		s.seckill_id "t_seckill_item.seckill_id",
+		s.name "t_seckill_item.name",
+		s.number
+		"seckill.number",
+		s.start_time "t_seckill_item.start_time",
+		s.end_time
+		"seckill.end_time",
+		s.create_time "t_seckill_item.create_time"
+		FROM
+		t_seckill_record sk
+		INNER JOIN t_seckill_item s ON sk.seckill_id=s.seckill_id
+		WHERE sk.seckill_id=#{seckillId} and sk.user_phone=#{userPhone}
+	</select>
+
+
+
+</mapper>

@@ -1,0 +1,108 @@
+/* 登录页面 */
+*{
+    margin:0;
+    padding:0;
+    font-family: "微软雅黑";
+}
+form{
+    position:relative;
+    left:55%;
+    margin-top:10%;
+    width:400px;
+    height:470px;
+    background-color: rgba(255, 255, 255, 0.3);
+    background-size: 100% 100%;
+}
+.footerimg{
+    position:relative;
+    left:54%;
+    margin-top:3%;
+    width:450px;
+    height:50px;
+}
+.footerimg img{
+    width:100%;
+    height:100%;
+}  
+.loginheader{
+    position:relative;
+    height:70px;
+    width:96.5%;
+    left:-20px;
+    top:40px;
+    line-height: 70px;
+    text-align: center;
+    background-color: #0072C6;
+    box-shadow: 0 2px 2px #7f7f7f;
+}
+.loginheader span{
+    color: #fff;
+    font-size: 26px;
+    font-weight: bold;
+}
+.username,.password,.userlogin{
+    position:relative;
+    margin:0 auto;
+    top:76px;
+    height:60px;
+    width:310px;
+    box-shadow: 0 2px 4px #7f7f7f;
+}
+.password{
+    top:98px;
+}
+.confirmpassword span{
+  float:right;
+  width:115px;
+  height:100%;
+}
+.confirmpassword span img{
+  width:100%;
+  height:100%;
+}
+.userlogin{
+   top:150px;
+   background-color: #2C2D2F;
+   line-height: 60px;
+   text-align: center;
+}
+.username span,.password span{
+    position:relative;
+    display: inline-block;
+    top:0;
+    left:0;
+    height:60px;
+    width:60px;
+    line-height: 60px;
+    text-align: center;
+    background-color: #2C2D2F;
+}
+.username span img,.password span img{
+    margin-top: 12px;
+}
+.username input,.password input{
+    position:absolute;
+    top:0;
+    height:100%;
+    width:235px;
+    opacity: 0.6;
+    border:none;
+    padding-left: 15px;
+}
+.userlogin button{
+    display:inline-block;
+    border:none;
+    background-color: transparent;
+    color:#fff;
+    font-size: 24px;
+    height:100%;
+    width:100%;
+}
+.triangle{
+    position:absolute;
+    left:-15px;
+    top:27px;
+}
+.userlogin:hover{
+    background-color: #54b8af;
+} 

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<beans xmlns="http://www.springframework.org/schema/beans"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"  
+    xmlns:context="http://www.springframework.org/schema/context"  
+    xmlns:mvc="http://www.springframework.org/schema/mvc"  
+    xmlns:aop="http://www.springframework.org/schema/aop" 
+    xsi:schemaLocation="http://www.springframework.org/schema/beans    
+                        http://www.springframework.org/schema/beans/spring-beans-4.3.xsd    
+                        http://www.springframework.org/schema/context    
+                        http://www.springframework.org/schema/context/spring-context-4.3.xsd    
+                        http://www.springframework.org/schema/mvc    
+                        http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+                        http://www.springframework.org/schema/aop
+                        http://www.springframework.org/schema/aop/spring-aop-4.3.xsd ">  
+                        
+    <!-- 代替注解映射器，注解处理器适配器加载  -->            
+    <mvc:annotation-driven />
+    
+    <mvc:default-servlet-handler/>
+                        
+    <!-- 自动扫描该包，使SpringMVC认为包下用了@controller注解的类是控制器 -->  
+    <context:component-scan base-package="cn.com.pepper.**.controller" />
+    
+    <!-- 开启aop，对类代理 -->
+	<aop:config proxy-target-class="true"/>
+		
+    <!--避免IE执行AJAX时，返回JSON出现下载文件 -->  
+    <bean id="mappingJackson2HttpMessageConverter"	class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+		<property name="supportedMediaTypes">
+			<list>
+				<value>text/html;charset=UTF-8</value>
+				<value>text/json;charset=UTF-8</value>
+				<value>application/json;charset=UTF-8</value>
+			</list>
+		</property>
+	</bean>
+	
+    <!-- 采用SpringMVC自带的JSON转换工具，支持@ResponseBody注解 -->   
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<ref bean="mappingJackson2HttpMessageConverter" />   
+			</list>
+		</property>
+	</bean>
+	
+    <!-- 定义跳转的文件的前后缀 ，视图模式配置-->  
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/html/"></property>
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+	
+    <!-- 异常统一处理 -->
+	<bean id="exceptionHandler" class="cn.com.pepper.exception.MyExceptionHandler"/>
+	
+	<!-- 配置文件上传-->  
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">          
+        <property name="defaultEncoding" value="UTF-8" />       
+        <property name="maxUploadSize" value="10485760000" />     
+        <property name="maxInMemorySize" value="40960" />    
+    </bean> 
+	    
+    <!-- 安全认证拦截器 -->
+    <mvc:interceptors>    
+	    <mvc:interceptor>   
+	    	<mvc:mapping path="/**" /> 
+	    	<mvc:exclude-mapping path="/checkCode/**" />
+	    	<mvc:exclude-mapping path="/login" />
+	    	<mvc:exclude-mapping path="/logout" />  
+	    	<mvc:exclude-mapping path="/register" />    	
+	        <bean class="cn.com.pepper.security.MyInterceptor"></bean>    
+	    </mvc:interceptor>  
+	</mvc:interceptors>  
+    
+</beans>  
