@@ -1,5 +1,8 @@
 package cn.com.learn.dataStructure.heap;
 
+/**
+ * @see 原理参考此博客：https://www.cnblogs.com/ysocean/p/8032660.html
+ */
 public class Heap {
 	
 	public static class Node {

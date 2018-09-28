@@ -1,5 +1,8 @@
 package cn.com.learn.dataStructure.tree;
 
+/**
+ * @see 原理参考博客：https://www.cnblogs.com/ysocean/p/8004211.html
+ */
 public class RedBlackTree {
 
 	private enum Color {

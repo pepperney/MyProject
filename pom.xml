@@ -86,7 +86,7 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.12</version>
-			<scope>test</scope>
+			<!--<scope>test</scope>-->
 		</dependency>
 
 		<!--2.日志: java日志有:slf4j,log4j,logback,common-logging;slf4j:是规范/接口 ;日志实现:log4j,logback,common-logging;使用:slf4j+logback -->

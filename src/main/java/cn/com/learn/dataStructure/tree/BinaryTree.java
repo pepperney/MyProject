@@ -6,6 +6,7 @@ import java.util.Stack;
  * 二叉树：如果树的每个节点最多只能有两个子节点，这样的树成为二叉树 二叉搜索树：左子节点小于父节点，右子节点大于等于父节点
  * 
  * @author pepper
+ * @see 参考此博客：https://www.cnblogs.com/ysocean/p/8032642.html
  * 
  */
 public class BinaryTree {
